@@ -1,6 +1,7 @@
-package com.alinanails.project.entity;
+package com.alinanails.project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,18 +10,23 @@ import java.util.List;
 public class Service {
 
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceId;
 
-    @Column (nullable = false)
+    @NotBlank
+    @Column (nullable = false,unique = true)
     private String serviceName;
 
+    @NotBlank
     @Column(nullable = false)
     private String serviceDescription;
 
+    @NotBlank
     @Column(nullable = false)
     private int durationInMinutes;
 
+    @NotBlank
     @Column(nullable = false)
     private BigDecimal servicePrice;
 

@@ -1,6 +1,7 @@
-package com.alinanails.project.entity;
+package com.alinanails.project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +13,11 @@ public class Appointment {
     @Column(unique = true)
     private Long appointmentId;
 
+    @NotBlank
     @Column(nullable = false)
     private LocalDateTime startTime;
 
+    @NotBlank
     @Column(nullable = false)
     private LocalDateTime endTime;
 

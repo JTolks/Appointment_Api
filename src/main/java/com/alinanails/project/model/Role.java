@@ -1,4 +1,4 @@
-package com.alinanails.project.entity;
+package com.alinanails.project.model;
 
 public enum Role {
 

@@ -1,17 +1,47 @@
 package com.alinanails.project.controller;
 
-import com.alinanails.project.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alinanails.project.model.User;
+import com.alinanails.project.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1")
 public class UserController {
 
-    @GetMapping
-     public User sayHello(){
-        return new User(1L, "26395758","yevgeniy.tolks@gmail.com");
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/hello")
+     public String hello(){
+        return userService.sayHello();
+    }
+
+    @GetMapping("user/{userId}")
+    public User getUserById(@PathVariable("userId") Long id){
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/users")
+    public Iterable<User> getAllUsersFromDb(){
+        return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public User createNewUser (@Valid @RequestBody User user){
+       return userService.createNewUser(user);
+    }
+    @PutMapping("user/{userId}")
+    Optional<User> updateUser (@PathVariable("userId") Long id,  @RequestBody  User user){
+       return userService.modifyUserById(id,user);
+    }
+
+    @DeleteMapping(path = "/user/{userId}")
+    void deleteUser (@PathVariable("userId")Long id){
+        userService.deleteUserById(id);
     }
 }
