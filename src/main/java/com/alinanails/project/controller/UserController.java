@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/user")
 public class UserController {
 
     private final UserService userService;
@@ -21,12 +21,12 @@ public class UserController {
         return userService.sayHello();
     }
 
-    @GetMapping("user/{userId}")
+    @GetMapping("{userId}")
     public User getUserById(@PathVariable("userId") Long id){
         return userService.getUserById(id);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     public Iterable<User> getAllUsersFromDb(){
         return userService.getAllUsers();
     }
@@ -35,12 +35,12 @@ public class UserController {
     public User createNewUser (@Valid @RequestBody User user){
        return userService.createNewUser(user);
     }
-    @PutMapping("user/{userId}")
+    @PutMapping("{userId}")
     Optional<User> updateUser (@PathVariable("userId") Long id,  @RequestBody  User user){
        return userService.modifyUserById(id,user);
     }
 
-    @DeleteMapping(path = "/user/{userId}")
+    @DeleteMapping("{userId}")
     void deleteUser (@PathVariable("userId")Long id){
         userService.deleteUserById(id);
     }

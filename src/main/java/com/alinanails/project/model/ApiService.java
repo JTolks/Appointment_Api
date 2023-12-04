@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-public class Service {
+public class ApiService {
 
     @Id
     @Column(unique = true)
@@ -33,7 +33,7 @@ public class Service {
    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     private List<Appointment> appointmentList;
 
-    public Service(Long serviceId, String serviceName, String serviceDescription, int durationInMinutes, BigDecimal servicePrice) {
+    public ApiService(Long serviceId, String serviceName, String serviceDescription, int durationInMinutes, BigDecimal servicePrice) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
@@ -41,7 +41,7 @@ public class Service {
         this.servicePrice = servicePrice;
     }
 
-    public Service() {
+    public ApiService() {
     }
 
     public Long getServiceId() {

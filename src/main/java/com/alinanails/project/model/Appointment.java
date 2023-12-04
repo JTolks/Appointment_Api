@@ -27,7 +27,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    private Service service;
+    private ApiService apiService;
 
 
     public Appointment(Long appointmentId, LocalDateTime startTime, LocalDateTime endTime) {

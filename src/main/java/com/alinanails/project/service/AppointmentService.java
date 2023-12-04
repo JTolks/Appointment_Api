@@ -1,5 +1,6 @@
 package com.alinanails.project.service;
 
+import com.alinanails.project.model.Appointment;
 import com.alinanails.project.repository.AppointmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +13,7 @@ public class AppointmentService {
         this.appointmentRepository = appointmentRepository;
     }
 
-
+    public Appointment createNewAppointment(Appointment appointment){
+        return appointmentRepository.save(appointment);
+    }
 }
