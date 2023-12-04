@@ -2,9 +2,11 @@ package com.alinanails.project.service;
 
 import com.alinanails.project.model.ApiService;
 import com.alinanails.project.repository.ApiServiceRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class ApiServiceLogic {
 
     private final ApiServiceRepository apiServiceRepository;

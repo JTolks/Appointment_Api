@@ -2,6 +2,7 @@ package com.alinanails.project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,9 +30,6 @@ public class ApiService {
     @NotBlank
     @Column(nullable = false)
     private BigDecimal servicePrice;
-
-   @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
-    private List<Appointment> appointmentList;
 
     public ApiService(Long serviceId, String serviceName, String serviceDescription, int durationInMinutes, BigDecimal servicePrice) {
         this.serviceId = serviceId;

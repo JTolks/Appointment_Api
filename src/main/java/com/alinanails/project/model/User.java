@@ -11,17 +11,18 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @Column(name = "id",
+            unique = true)
+    private Long id;
 
     @NotBlank(message = "Phone number must not be empty")
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
     @NotBlank
     @Email()
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @NotBlank
@@ -30,11 +31,13 @@ public class User {
 
     private Role role;
 
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<Appointment> appointmentList;
 
     public User(Long userId, String phoneNumber, String email, String password) {
-        this.userId = userId;
+        this.id = userId;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
@@ -44,11 +47,11 @@ public class User {
     }
 
     public Long getUserId() {
-        return userId;
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserId(Long id) {
+        this.id = id;
     }
 
     public String getPhoneNumber() {
@@ -80,7 +83,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

@@ -16,4 +16,8 @@ public class AppointmentService {
     public Appointment createNewAppointment(Appointment appointment){
         return appointmentRepository.save(appointment);
     }
+
+    public String sayHelloToNewAppointment(){
+        return "Hello new to new Appointment";
+    }
 }

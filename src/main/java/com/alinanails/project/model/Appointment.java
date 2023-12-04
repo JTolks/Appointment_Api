@@ -1,33 +1,43 @@
 package com.alinanails.project.model;
 
 import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "appointment")
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name = "appointment_id",unique = true)
     private Long appointmentId;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(name = "start_time",
+            nullable = false)
     private LocalDateTime startTime;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(name = "stop_time",
+            nullable = false)
     private LocalDateTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "user_appointment_fk"))
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "service_id")
-    private ApiService apiService;
+    @JoinColumn(name = "master_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "master_appointment_fk"))
+    private Master master;
 
 
     public Appointment(Long appointmentId, LocalDateTime startTime, LocalDateTime endTime) {
