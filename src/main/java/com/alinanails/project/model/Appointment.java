@@ -3,6 +3,7 @@ package com.alinanails.project.model;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +26,11 @@ public class Appointment {
             nullable = false)
     private LocalDateTime endTime;
 
+    @NotBlank
+    @Value("${is.payment.confirmed}")
+    @Column(nullable = false)
+    private Boolean isPaymentConfirmed;
+
     @ManyToOne
     @JoinColumn(name = "user_id",
             nullable = false,
@@ -40,10 +46,11 @@ public class Appointment {
     private Master master;
 
 
-    public Appointment(Long appointmentId, LocalDateTime startTime, LocalDateTime endTime) {
+    public Appointment(Long appointmentId, LocalDateTime startTime, LocalDateTime endTime, Boolean isPaymentConfirmed) {
         this.appointmentId = appointmentId;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isPaymentConfirmed = isPaymentConfirmed;
     }
 
     public Appointment() {
@@ -71,6 +78,14 @@ public class Appointment {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public Boolean getPaymentConfirmed() {
+        return isPaymentConfirmed;
+    }
+
+    public void setPaymentConfirmed(Boolean paymentConfirmed) {
+        isPaymentConfirmed = paymentConfirmed;
     }
 
     @Override

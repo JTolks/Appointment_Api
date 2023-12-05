@@ -18,6 +18,6 @@ public class AppointmentService {
     }
 
     public String sayHelloToNewAppointment(){
-        return "Hello new to new Appointment";
+        return "Hello to new Appointment";
     }
 }

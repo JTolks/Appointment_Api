@@ -21,8 +21,8 @@ public class UserController {
         return userService.sayHello();
     }
 
-    @GetMapping("{userId}")
-    public User getUserById(@PathVariable("userId") Long id){
+    @GetMapping("{id}")
+    public User getUserById(@PathVariable("id") Long id){
         return userService.getUserById(id);
     }
 
@@ -35,13 +35,13 @@ public class UserController {
     public User createNewUser (@Valid @RequestBody User user){
        return userService.createNewUser(user);
     }
-    @PutMapping("{userId}")
-    Optional<User> updateUser (@PathVariable("userId") Long id,  @RequestBody  User user){
+    @PutMapping("{id}")
+    Optional<User> updateUser (@PathVariable("id") Long id,  @RequestBody  User user){
        return userService.modifyUserById(id,user);
     }
 
-    @DeleteMapping("{userId}")
-    void deleteUser (@PathVariable("userId")Long id){
+    @DeleteMapping("{id}")
+    public void deleteUser (@PathVariable("id")Long id){
         userService.deleteUserById(id);
     }
 }
