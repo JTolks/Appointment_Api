@@ -2,6 +2,7 @@ package com.alinanails.project.service;
 
 import com.alinanails.project.model.ApiService;
 import com.alinanails.project.repository.ApiServiceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -9,12 +10,10 @@ import java.util.Optional;
 @Service
 public class ApiServiceLogic {
 
-    private final ApiServiceRepository apiServiceRepository;
+    @Autowired
+    private  ApiServiceRepository apiServiceRepository;
 
 
-    public ApiServiceLogic(ApiServiceRepository apiServiceRepository) {
-        this.apiServiceRepository = apiServiceRepository;
-    }
 
     public ApiService getServiceById(Long id){
         return apiServiceRepository.findById(id)

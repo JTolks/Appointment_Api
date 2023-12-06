@@ -1,26 +1,42 @@
 package com.alinanails.project.controller;
 
-import com.alinanails.project.repository.AppointmentRepository;
+import com.alinanails.project.model.Appointment;
+import com.alinanails.project.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/appointment")
-public class AppointmentController {
+    @RequestMapping("/api/v1/appointments")
+    public class AppointmentController {
+        @Autowired
+        private AppointmentService appointmentService;
 
-    private final AppointmentRepository appointmentRepository;
+        @GetMapping
+        public List<Appointment> getAllAppointments() {
+            return appointmentService.getAllAppointments();
+        }
 
-    @Autowired
-    public AppointmentController(AppointmentRepository appointmentRepository) {
-        this.appointmentRepository = appointmentRepository;
+        @GetMapping("/{id}")
+        public Appointment getAppointmentById(@PathVariable Long id) {
+            return appointmentService.getAppointmentById(id);
+        }
+
+        @PostMapping
+        public Appointment createAppointment(@RequestBody Appointment appointment) {
+            return appointmentService.createAppointment(appointment);
+        }
+
+        @PutMapping("/{id}")
+        public Optional<Appointment> updateAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
+            return appointmentService.modifyAppointment(id, appointment);
+        }
+
+        @DeleteMapping("/{id}")
+        public void modifyAppointment(@PathVariable Long id) {
+            appointmentService.deleteAppointment(id);
+        }
     }
 
-    @GetMapping("/hello")
-    public String sayHelloToAppointment(){
-        return "Hello appointment page";
-    }
-
-
-}
